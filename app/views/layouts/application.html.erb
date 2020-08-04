@@ -1,15 +1,64 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    body {
+      padding: 10px;
+      background-color: #444;
+    }
+
+    ul.topnav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    ul.topnav li {float: left;}
+
+    ul.topnav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: medium;
+    }
+
+    ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+    ul.topnav li.right {float: right;}
+
+    @media screen and (max-width: 600px) {
+      ul.topnav li.right, 
+      ul.topnav li {float: none;}
+    }
+  </style>
   <head>
-    <title>Toshinowo</title>
+    <title>toshinowo.co</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('toshinowo.png') %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Custom styles for this template -->
+    <link href="" rel="stylesheet">
+    <ul class="topnav">
+      <li class="acive"><%= link_to "toshinowo.co", root_path %></li>
+      <li><%= link_to "projects", pages_projects_path %></li>
+      <li><%= link_to "interests", pages_interests_path %></li>
+      <li class="right"><%= link_to "about", pages_about_path %></li>
+    </ul>
   </head>
 
   <body>
     <%= yield %>
+    <footer class="footer text-faded text-center py-5">
+      <div class="container">
+        <p class="m-0 small">Copyright &copy; toshinowo.co 2020. Developed on Rails.</p>
+      </div>
+    </footer>
   </body>
 </html>
