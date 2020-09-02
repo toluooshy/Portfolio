@@ -93,7 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { :host => 'http://toshinowo.herokuapp.com' }  
+  config.action_mailer.default_url_options = { :host => 'toshinowo.herokuapp.com' :protocol => 'https' }  
   config.action_mailer.delivery_method = :smtp  
   config.action_mailer.perform_deliveries = true  
   config.action_mailer.raise_delivery_errors = false  
@@ -102,7 +102,7 @@ Rails.application.configure do
   {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'toshinowo.herokuapp.com',
+    domain:               'gmail.com',
     user_name:            ENV["GMAIL_EMAIL"],
     password:             ENV["GMAIL_PASSWORD"],
     authentication:       'plain',
