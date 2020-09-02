@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should get bugs" do
+    get welcome_bugs_url
+    assert_response :success
+  end
 end
