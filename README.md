@@ -7,4 +7,4 @@ I undertook this project as a way to put my ruby and web development skills to t
 
 ### Screenshot   
 Here is a screenshot of toshinowo.co:  
-<img src="app/assets/images/toshinowoweb.png" width="683px" height="384px"/>
+<img src="app/assets/images/toshinowoweb.png" width="683px" height="301px"/>
