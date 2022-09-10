@@ -3,8 +3,10 @@
   <style>
     body {
       padding: 10px;
-      background-color: #444;
-      background-image: linear-gradient(#777, #444);
+    }
+
+    * {
+      padding: 5px;
     }
 
     ul.topnav {
@@ -59,6 +61,7 @@
     <footer class="footer text-faded text-center py-5">
       <div class="container">
         <p class="m-0 small">toshinowo.co &copy; 2022</p>
+        <h6 style="font-style: italic"><%= link_to "bugs?", welcome_bugs_path %></h6>
       </div>
     </footer>
   </body>
