@@ -263,6 +263,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-sass (~> 3.3, >= 3.3.6)
+  bundler
   capybara
   coffee-rails (~> 4.2)
   debug
