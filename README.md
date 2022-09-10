@@ -1,10 +1,24 @@
-# toshinowo.co <img src="app/assets/images/toshinowo.png" width="60" height="60"/>
+# README
 
-### Summary
-Welcome to the GitHub repo for toshinowo.co!   
-I undertook this project as a way to put my ruby and web development skills to the test, creating personal website that I developed using Ruby and Rails 5.0. This website now serves as a supplement to my LinkedIn profile and as a channel for me to express myself through projects and interests, among other quirky happenings.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
+Things you may want to cover:
 
-### Screenshot   
-Here is a screenshot of toshinowo.co:  
-<img src="app/assets/images/toshinowoweb.png" width="683px" height="301px"/>
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
