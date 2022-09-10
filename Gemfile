@@ -52,6 +52,7 @@ gem "turbolinks", "~> 5"
 # gem "capistrano-rails", group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
+gem "bundler"
 gem "bootsnap", ">= 1.1.0"
 
 gem "bootstrap-sass", "~> 3.3", ">= 3.3.6"
