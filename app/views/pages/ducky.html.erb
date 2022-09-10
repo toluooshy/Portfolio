@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #fefefe;
+    background-color: #45b6fe;
+}
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center; }
+canvas { margin: auto; display: block;}
+head {
+    height: 0px;
+}
+ul.topnav {
+    height: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: medium;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
+body {
+    background-color: #444;
+    background-image: linear-gradient(#777, #444);
+    color: #eee;
+}
+</style>
+</head>
+
+<div>
+<body onload="startGame()">
+<script>
+var myGamePiece1, myGamePiece2, myGamePiece3, myGamePiece4, myGamePiece5;
+var myObstacles = [];
+var myScore;
+var frame = 100
+
+function startGame() {
+    myGamePiece1 = new component(10, 10, "orange", 115, 320);
+    myGamePiece2 = new component(30, 30, "gray", 105, 330);
+    myGamePiece3 = new component(25, 40, "#cfb997", 107.5, 330);
+    myGamePiece4 = new component(22, 16, "#003300", 109, 330);
+    myGamePiece5 = new component(20, 20, "green", 110, 325);
+    myScore = new component("30px", "Arial", "white", 10, 35, "text");
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 270;
+        this.canvas.height = 380;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;
+    this.gravity = 0;
+    this.horizontalSpeed = 0;
+    this.baseImage = new Image();
+    this.baseImage.onload = function() {
+	context.drawImage(baseImage, 0, 0);
+    }
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX + this.horizontalSpeed;
+        this.y += this.speedY;
+        this.hitBottom();
+    }
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece1.crashWith(myObstacles[i])) { return; } 
+	if (myGamePiece2.crashWith(myObstacles[i])) { return; } 
+	if (myGamePiece3.crashWith(myObstacles[i])) { return; } 
+	if (myGamePiece4.crashWith(myObstacles[i])) { return; } 
+	if (myGamePiece5.crashWith(myObstacles[i])) { return; } 
+    }
+    myGameArea.clear();
+    myGameArea.frameNo += 1;
+    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+        x = myGameArea.canvas.width;
+        minWidth = 50;
+        maxWidth = 150;
+        width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
+        minGap = 50;
+        maxGap = 100;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        myObstacles.push(new component(x - width - gap, 35, "#3c280d", 0, 0));
+	myObstacles.push(new component(10, 35, "tan", x - width - gap, 0));
+	myObstacles.push(new component(15, 20, "tan", x - width - gap - 2.5, 7.5));
+        myObstacles.push(new component(width + 50, 35, "#3c280d", x - gap, 0));
+	myObstacles.push(new component(10, 35, "tan", x - gap, 0));
+	myObstacles.push(new component(15, 20, "tan", x - gap - 2.5, 7.5));	
+    }
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].y += 1.0000001;
+        myObstacles[i].update();
+    }
+    myScore.text = Math.floor(myGameArea.frameNo/5);
+    myScore.update();
+    myGamePiece1.newPos(); myGamePiece1.update();
+    myGamePiece2.newPos(); myGamePiece2.update();
+    myGamePiece3.newPos(); myGamePiece3.update();
+    myGamePiece4.newPos(); myGamePiece4.update();
+    myGamePiece5.newPos(); myGamePiece5.update();
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function move(n) {
+    myGamePiece1.horizontalSpeed = n;
+    myGamePiece2.horizontalSpeed = n;
+    myGamePiece3.horizontalSpeed = n;
+    myGamePiece4.horizontalSpeed = n;
+    myGamePiece5.horizontalSpeed = n;
+}
+</script>
+</br>
+<h1>Ducky</h1>
+<button style="margin-right: 25px; color: black" onmousedown="move(-1.5)" onmouseup="move(0)" ontouchstart="move(-1.5)" ontouchend="move(0)"><</button>
+<button style="margin-left: 25px; color: black" onmousedown="move(1.5)" onmouseup="move(0)" ontouchstart="move(1.5)" ontouchend="move(0)">></button>
+<p>
+    Hey you found a secret feature! Good job!
+    <br/>
+    <%# <%= link_to "back", welcome_bugs_path %> %>
+</p>
+
+<pre>
+You Are Ducky. 🦆
+Navigate Waters. 🌊
+Score Big! 🎰
+</pre>
+</div>
+</body>
+</html>

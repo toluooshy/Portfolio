@@ -15,11 +15,21 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+# Use SCSS for stylesheets
+gem "sass-rails"
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
+gem "turbolinks", "~> 5"
+
+# Use CoffeeScript for .coffee assets and views
+gem "coffee-rails", "~> 4.2"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -41,6 +51,13 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+# Enable contact webapp functionality
+gem "bootstrap-sass", "~> 3.3", ">= 3.3.6"
+gem "mail_form"
+gem "jquery-rails", "~> 4.1", ">= 4.1.1"
+gem "dotenv-rails", groups: [:development, :test]
+gem "sendgrid-ruby"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
