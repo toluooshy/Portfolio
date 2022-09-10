@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  root "welcome#index"
+  get 'pages/projects'
+  get 'pages/resume'
+  get 'pages/about'
+  get 'pages/interests'
+  get 'pages/resume'
+  get 'pages/ducky'
+  root 'welcome#index'
+  get 'welcome/bugs'
+  resources :welcome, only: [:index, :new, :create]
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
